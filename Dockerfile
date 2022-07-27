@@ -30,7 +30,6 @@ RUN npm run build:h5:${env}
 
 # 启动nginx服务
 FROM nginx
-ENV LANG en_US.UTF-8
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN echo 'Asia/Shanghai' >/etc/timezone
 RUN echo "server {  \
