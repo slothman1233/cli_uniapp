@@ -1,0 +1,33 @@
+{
+    "easycom": {
+        "autoscan": true,
+        "custom": {
+            "^u-(.*)": "vk-uview-ui/components/u-$1/u-$1.vue"
+        }
+    },
+    "pages": [{
+            "path": "pages/index/index",
+            "style": {
+                "navigationBarTitleText": "uni-app"
+            }
+        },
+        {
+            "path": "pages/index",
+            "style": {
+                "navigationBarTitleText": "index"
+            }
+        },
+        {
+            "path": "pages/qs/index",
+            "style": {
+                "navigationBarTitleText": "qs"
+            }
+        }
+    ],
+    "globalStyle": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "uni-app",
+        "navigationBarBackgroundColor": "#F8F8F8",
+        "backgroundColor": "#F8F8F8"
+    }
+}

@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true /* 跳过声明文件的类型检查. */,
+    "forceConsistentCasingInFileNames": true /* 不允许对同一文件的大小写不一致的引用 */,
+    "lib": ["esnext", "dom"],
+    "types": [
+      "@dcloudio/types",
+      "node",
+      "vite/client", 
+      "weixin-app",// 添加 weixin 的声明
+      "@dcloudio/types/uni-app"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "comps/*": ["src/components/*"],
+      "services/*": ["src/services/*"],
+      "views/*": ["src/views/*"],
+      "store/*": ["src/store/*"],
+      "mock/*": ["mock/*"]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "vite.config.ts",
+    "config/**/*.ts",
+    "mock/**/*.ts",
+    "types/**/*.d.ts",
+    "types/**/*.ts"
+  ]
+}
