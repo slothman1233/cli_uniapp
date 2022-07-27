@@ -1,9 +1,10 @@
-#RUN npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/
-#下载项目文件的node_modules
+# 安装npm 依赖
 FROM node:16 as build
 
-# 切换为阿里源
-RUN npm config set registry https://registry.npmmirror.com/
+RUN npm config set registry http://npm.taobao.org
+
+#sass 源切换 
+RUN npm config set sass_binary_site http://npm.taobao.org/mirrors/node-sass
 
 WORKDIR /webapp
 
@@ -24,41 +25,29 @@ COPY --from=build /webapp/node_modules  ./node_modules
 
 COPY . .
 
-RUN npm run build:${env}
-
-#下载生产的node_modules
-FROM node:16 as distnodemodules
-
-# 切换为阿里源
-RUN npm config set registry https://registry.npmmirror.com/
-
-WORKDIR /web
-
-COPY package.json ./
-
-COPY package-lock.json ./
-
-RUN  npm install --production
+RUN npm run build:h5:${env}
 
 
-#产出生产镜像
-FROM node:16-alpine
-
-#设置时区
+# 启动nginx服务
+FROM nginx
+ENV LANG en_US.UTF-8
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN echo 'Asia/Shanghai' >/etc/timezone
+RUN echo "server {  \
+                      listen       80; \
+                      server_name  localhost; \
+                      location / { \
+                      root   /var/www/html/; \
+			          index /index.html; \
+                      proxy_set_header        Host jeecg-boot-system; \
+                      proxy_set_header        X-Real-IP \$remote_addr; \
+                      proxy_set_header        X-Forwarded-For \$proxy_add_x_forwarded_for; \
+                  } \
+                 }" > /etc/nginx/conf.d/default.conf \
+    &&  mkdir  -p  /var/www \
+    &&  mkdir -p /var/www/html
 
-WORKDIR /web
+COPY --from=builddist /web/dist/build/h5 ./var/www/html/
 
-COPY --from=distnodemodules /web/node_modules ./node_modules
-
-COPY --from=builddist /web/dist ./dist
-
-COPY . .
-
-
-# 暴露端口映射
-# EXPOSE 2000
-ENTRYPOINT command npm run serve
-
-
+EXPOSE 80
+EXPOSE 443

@@ -7,6 +7,13 @@ node版本 v16.13.0
 npm版本 8.0.0以上
 ```
 
+docker 命令
+```bash
+docker build -t uniapp . --build-arg env=pre --tag uniapp:1
+
+docker run -d -p :8085:80  uniapp:1
+```
+
 命令介绍
 
 ```bash

@@ -15,7 +15,7 @@
 
     const store = useStore();
 
-    // console.log(store.state);
+    console.log(store.state.app.configModel);
 
     onMounted(async () => {
         const a = await getrandom();
