@@ -1,4 +1,3 @@
-
 /**
  * 父组件传进来的参数模型
  */
@@ -9,8 +8,7 @@ export type propType = {};
  */
 export type refType = {};
 
-
 export type staticDataModel = propType & {
-    list: any[],
-    show: boolean
-}
+    list: any[];
+    show: boolean;
+};

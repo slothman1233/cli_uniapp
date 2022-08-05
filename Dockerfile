@@ -12,6 +12,8 @@ COPY package.json ./
 
 COPY package-lock.json ./
 
+RUN npm cache clear --force
+
 RUN npm install --force
 
 
