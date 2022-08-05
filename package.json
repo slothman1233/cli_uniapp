@@ -59,6 +59,7 @@
         "@dcloudio/uni-mp-weixin": "3.0.0-alpha-3040820220424001",
         "@dcloudio/uni-quickapp-webview": "3.0.0-alpha-3040820220424001",
         "@element-plus/icons": "^0.0.11",
+        "@hysz/hysz-cli": "^1.0.3",
         "@vue/eslint-config-prettier": "^6.0.0",
         "axios": "^0.27.2",
         "element-plus": "^1.2.0-beta.3",
