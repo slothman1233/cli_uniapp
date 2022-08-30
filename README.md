@@ -73,7 +73,6 @@ build:mp-weixin:ga: uni build -p mp-weixin --mode ga --- 微信 生产环境正�
 │   │   │   ├── configClientEnvPlugin 客户端环境变量初始化
 │   │   │   ├── configCompressPlugin 使用 gzip 或者 brotli 来压缩资源
 │   │   │   ├── configMockPlugin 使用 mock 环境
-│   │   │   ├── configSvgIconsPlugin   svg 处理
 │   │   │   └── plugins.less vite.config.ts  中的 plugins 配置入口
 │   │   └── proxy.ts   代理配置
 ├── dist  生产代码文件夹
