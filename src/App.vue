@@ -1,19 +1,24 @@
 <script setup lang="ts">
     import { onLaunch, onShow, onHide } from '@dcloudio/uni-app';
-    import { App as mutations } from 'store/mutation-types';
-    import { useStore } from './store';
+
+    import permission from '@/common/utils/interceptor/interceptor';
+
     //不能修改
     import env from '@/common/config/dev';
-    import permission from '@/common/utils/interceptor/interceptor';
+    import { useStore, usedispatch } from '@/store';
+    // import { usedispatch } from './store';
+    import { App as app } from '@/store/mutation-types';
     onLaunch(() => {
         console.log('App Launch');
         permission();
-
         const store = useStore();
 
-        store.dispatch(mutations.action.CONFIGMODEL, env);
+        // console.log(store.getters);
 
-        // console.log(555555555555555);
+        usedispatch(store.state.app.module, app.action.CONFIGMODEL, env);
+
+        // console.log(env);
+
         // #ifdef MP-DINGTALK
         console.log(process.env.UNI_SSS);
         // #endif

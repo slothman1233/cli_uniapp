@@ -6,6 +6,7 @@
     <u-action-sheet :list="list"></u-action-sheet>
     <u-action-sheet :list="list" v-model="show"></u-action-sheet>
     <u-button @click="show = true">打开ActionSheet</u-button>
+    <iconfont name="icon-yonghu" :color="'#4bff50'" :fontSize="'60px'"></iconfont>
 </template>
 
 <script lang="ts">
@@ -13,10 +14,10 @@
     import { propType, staticDataModel } from './model';
     import cpmDemo from './components/cpmDemo/index.vue';
     import HelloWorlds from '@/components/HelloWorlds/index.vue';
-
+    import iconfont from '@/components/IconFonts/index.vue';
     export default defineComponent({
         name: 'qsList',
-        components: { cpmDemo, HelloWorlds },
+        components: { cpmDemo, HelloWorlds, iconfont },
         setup(props: propType, ctx) {
             const staticData: staticDataModel = reactive({
                 ...props,

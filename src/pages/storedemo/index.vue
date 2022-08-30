@@ -2,21 +2,23 @@
     <view class="content">
         <image class="logo" src="/static/assets/image/logo.png" />
         <view class="text-area">
-            <text class="title" @click="navigatess"> 状态管理示例</text>
+            <text class="title" @click="navigatess">{{ title }}</text>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
-    import routers from '@/common/router/routers';
     import { getrandom } from '@/services/randomDataService/randomData';
-    import { useStore } from '@/store';
+    import { usedispatch, useStore } from '@/store';
+    import { demo } from '@/store/mutation-types';
     import { onMounted, ref } from 'vue';
     const title = ref('Hello');
 
     const store = useStore();
 
-    console.log(store.state.app.configModel.apiPath);
+    console.log(store.getters);
+
+    usedispatch(store.state.demo.module, demo.action.CONFIGMODEL, 'w');
 
     onMounted(async () => {
         const a = await getrandom();
@@ -26,7 +28,7 @@
         // console.log(123123123);
 
         uni.navigateTo({
-            url: routers.storedemo.path,
+            url: '/pages/qs/index',
         });
     };
 </script>

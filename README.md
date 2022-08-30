@@ -11,31 +11,41 @@ docker 命令
 ```bash
 docker build -t uniapp . --build-arg env=pre --tag uniapp:1
 
-docker run -d -p 8085:80  uniapp:1
+docker run -d -p :8085:80  uniapp:1
 ```
 
 命令介绍
 
 ```bash
-npm run dev:h5:dev     ----- h5 运行dev环境
-npm run dev:h5:test  ----- h5 运行test 环境
-npm run dev:h5:pre ----- h5 运行pre 环境
-npm run dev:h5:ga  ----- h5 运行ga 环境
+npm run dev:h5:dev     ----- h5 运行开发环境开发包
+npm run dev:h5:test  ----- h5 运行测试环境开发包
+npm run dev:h5:pre ----- h5 运行预发布环境开发包
+npm run dev:h5:ga  ----- h5 运行生产环境开发包
 
-npm run dev:mp-weixin:dev     ----- 微信 运行dev环境
-npm run dev:mp-weixin:test  ----- 微信 运行test 环境
-npm run dev:mp-weixin:pre ----- 微信 运行pre 环境
-npm run dev:mp-weixin:ga  ----- 微信 运行ga 环境
+npm run dev:mp-weixin:dev     ----- 微信 运行开发环境开发包
+npm run dev:mp-weixin:test  ----- 微信 运行测试环境开发包
+npm run dev:mp-weixin:pre ----- 微信 运行预发布环境开发包
+npm run dev:mp-weixin:ga  ----- 微信 运行生产环境开发包
 
 npm run build:h5 ----- h5 打包
+build:h5:dev: uni build --mode dev ----- h5 开发环境正式包
+build:h5:test: uni build --mode test ----- h5 测试环境正式包
+build:h5:pre: uni build --mode pre ----- h5 预发布环境正式包
+build:h5:ga: uni build --mode ga ----- h5 生产环境正式包
+build:h5:ssr: uni build --ssr ----- h5 ssr环境正式包
+
 npm run build:mp-weixin ----- 微信 打包
+build:mp-weixin:dev: uni build -p mp-weixin --mode dev --- 微信 开发环境正式包
+build:mp-weixin:test: uni build -p mp-weixin --mode test --- 微信 测试环境正式包
+build:mp-weixin:pre: uni build -p mp-weixin --mode pre --- 微信 预发布环境正式包
+build:mp-weixin:ga: uni build -p mp-weixin --mode ga --- 微信 生产环境正式包
 ```
 
 开发方式
 
 ```bash
 1.在views里面创建vue的页面
-2.在pages.json里面创建对应的路由
+2.在src/common/router/routers 里面创建对应的路由
 ```
 
 
@@ -71,14 +81,24 @@ npm run build:mp-weixin ----- 微信 打包
 │   ├── demo  mock示例
 │   ├── _createProductionServer.ts  mock注入初始化
 │   └── _util.ts 基础模型
+├── publishscript 自动发布文件夹
+│   └── weixin 自动发布到微信文件夹
+│   │   │   ├── private.wxc5d979b0149b0b55.key 小程序的 privateKey  需要到小程序自行下载
+│   │   │   └── weixin.js 自动发布到微信小程序
 ├── src
 │   ├── common 公共部分
 │   │   ├── config 针对客户端的环境配置文件夹
+│   │   ├── plugins 第三方插件文件夹
+│   │   ├── router 针对客户端的环境配置文件夹
+│   │   │   ├── index 路由入口
+│   │   │   ├── routers 页面路由配置
+│   │   │   └── pages 其他配置
 │   │   ├── utils 通用文件夹
 │   │   │   ├── interceptor 全局拦截器
 │   │   │   ├── storage 本地缓存处理
 │   │   │   └── index.less 全局注入的样式
 │   ├── components 组件文件夹 (文件夹名为组件名---只有文件夹下的index.ts的default为对应的组件方法)
+│   │   ├── IconFonts 字体图标组件 （在qs页面有使用示例）
 │   │   └── HelloWorld.vue     可以删除
 │   ├── layout 布局文件夹
 │   │   ├── components 布局的组件文件夹
@@ -104,6 +124,7 @@ npm run build:mp-weixin ----- 微信 打包
 │   │   │   │   └── index.less 全局函数式样式（默认注入）
 │   │   │   └── index.less 全局默认样式（默认注入）
 │   ├── pages vue页面
+│   │   ├── storedemo 状态管理使用示例页面
 │   │   ├── qs 示例页面
 │   │   │   ├── index 页面
 │   │   │   ├── model 当前页面的模型文件
@@ -123,6 +144,8 @@ npm run build:mp-weixin ----- 微信 打包
 ├── .eslintrc.js    eslint  配置
 ├── prettier.config.js  prettier配置
 ├── postcss.config.js   postcss配置（废弃，直接在vite.config.ts中的css配置）
+├── Dockerfile web的dockerfile脚本
+├── WeiXinDockerfile 微信的dockerfile脚本
 └── vite.config.ts vite 服务配置
 
 ```

@@ -1,22 +1,28 @@
 import { Module } from 'vuex';
 import { App, RootStateTypes } from '../interface/index';
 import { App as Apps } from '../mutation-types';
+import devConfigModel from '@/common/config/dev';
 
 const app: Module<App, RootStateTypes> = {
+    namespaced: true,
     state() {
         return {
+            module: 'app',
             count: 0,
-            configModel: {
-                name: '',
-            },
+            configModel: devConfigModel,
         };
     },
+    getters: {
+        [Apps.mutations.INCREMENT](state) {
+            return state.configModel;
+        },
+    },
     mutations: {
-        [Apps.mutations.INCREMENT](state: App) {
+        [Apps.mutations.INCREMENT](state) {
             state.count++;
         },
 
-        [Apps.mutations.CONFIGMODEL](state: App, configModel: clientEnv) {
+        [Apps.mutations.CONFIGMODEL](state, configModel: clientEnv) {
             state.configModel = configModel;
         },
     },

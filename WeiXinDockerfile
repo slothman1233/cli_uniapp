@@ -1,0 +1,31 @@
+# 安装npm 依赖
+FROM node:16 as build
+
+RUN npm config set registry https://registry.npmmirror.com/
+
+#sass 源切换 
+RUN npm config set sass_binary_site https://registry.npmmirror.com/mirrors/node-sass
+
+WORKDIR /webapp
+
+COPY package-lock.json ./
+
+COPY package.json ./
+
+RUN npm install --force
+
+
+#获取生产文件
+FROM node:16 as builddist
+ARG env
+
+WORKDIR /web
+
+COPY --from=build /webapp/node_modules  ./node_modules
+
+COPY . .
+
+RUN npm run build:mp-weixin:${env}
+
+RUN npm run weixin-ci
+

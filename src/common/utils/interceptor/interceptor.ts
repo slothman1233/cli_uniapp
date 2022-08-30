@@ -10,7 +10,7 @@ export default function permission() {
             /**
              * 拦截前触发
              */
-            invoke(e) {
+            invoke(e: any) {
                 // console.log(e);
                 //获取用户的token
                 // const token = uni.getStorageSync('uni_id_token'),
@@ -47,7 +47,7 @@ export default function permission() {
             /**
              * 失败回调拦截
              */
-            fail(err) {
+            fail(err: any) {
                 // console.log(err);
                 // if (Debug) {
                 //     console.log(err);

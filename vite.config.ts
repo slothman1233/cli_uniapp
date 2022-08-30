@@ -5,15 +5,18 @@ import path from 'path';
 import proxy from './config/viteConfig/proxy';
 import plugins from './config/viteConfig/plugins/plugins';
 
-import { wrapperEnv } from './src/common/utils/env';
-
 import autoprefixer from 'autoprefixer';
+
+import writePage from './src/common/router/index';
+import { wrapperEnv } from './config/viteConfig/utils/wrapperEnv';
 
 //env根路径
 const envDir = path.resolve(process.cwd(), 'config/env');
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(async ({ command, mode }) => {
+    await writePage();
+
     const isBuild = command === 'build';
 
     const env = loadEnv(mode, envDir);

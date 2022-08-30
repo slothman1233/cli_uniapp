@@ -1,5 +1,6 @@
 const ga: clientEnv = {
-  name: 'ga',
+    name: 'ga',
+    apiPath: 'http://www.baidu.com/',
 };
 
 export default ga;

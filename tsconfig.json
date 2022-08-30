@@ -39,5 +39,5 @@
     "mock/**/*.ts",
     "types/**/*.d.ts",
     "types/**/*.ts"
-  ]
+, "src/pages.js"  ]
 }

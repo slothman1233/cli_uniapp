@@ -91,7 +91,7 @@ export default class StorageUtils {
         complete?: storageFun,
     ) {
         uni.getStorageInfo({
-            success: function(res) {
+            success: function(res: UniApp.GetStorageInfoSuccess) {
                 success(res);
             },
             fail: function(result: any) {

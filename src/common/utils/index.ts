@@ -44,7 +44,7 @@ export class Utils {
      */
     public static debounce(func: Function, wait: number, immediate = false) {
         let timeout: any, args: any, context: any, timestamp: number, result: any;
-
+        let contexts = context || null;
         const later = function() {
             // 据上一次触发时间间隔
             const last = +new Date() - timestamp;
@@ -56,20 +56,21 @@ export class Utils {
                 timeout = null;
                 // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
                 if (!immediate) {
-                    result = func.apply(context, args);
-                    if (!timeout) context = args = null;
+                    result = func.apply(contexts, args);
+                    if (!timeout) contexts = args = null;
                 }
             }
         };
         return (...args: any) => {
-            context = this;
+            // eslint-disable-next-line @typescript-eslint/no-this-alias
+            contexts = this;
             timestamp = +new Date();
             const callNow = immediate && !timeout;
             // 如果延时不存在，重新设定延时
             if (!timeout) timeout = setTimeout(later, wait);
             if (callNow) {
-                result = func.apply(context, args);
-                context = args = null;
+                result = func.apply(contexts, args);
+                contexts = args = null;
             }
 
             return result;

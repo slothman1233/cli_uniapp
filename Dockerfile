@@ -1,18 +1,20 @@
 # 安装npm 依赖
 FROM node:16 as build
 
-RUN npm config set registry http://npm.taobao.org
+RUN npm config set registry https://registry.npmmirror.com/
 
 #sass 源切换 
-RUN npm config set sass_binary_site http://npm.taobao.org/mirrors/node-sass
+RUN npm config set sass_binary_site https://registry.npmmirror.com/mirrors/node-sass
 
 WORKDIR /webapp
 
-COPY package.json ./
-
 COPY package-lock.json ./
 
-RUN npm cache clear --force
+COPY package.json ./
+
+# RUN npm cache clear --force
+
+# RUN npm cache verify
 
 RUN npm install --force
 
@@ -40,7 +42,6 @@ RUN echo "server {  \
                       location / { \
                       root   /var/www/html/; \
 			          index /index.html; \
-                      proxy_set_header        Host jeecg-boot-system; \
                       proxy_set_header        X-Real-IP \$remote_addr; \
                       proxy_set_header        X-Forwarded-For \$proxy_add_x_forwarded_for; \
                   } \
