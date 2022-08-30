@@ -4,7 +4,6 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import configClientEnvPlugin from './configClientEnvPlugin';
 import configCompressPlugin from './configCompressPlugin';
 import configMockPlugin from './configMockPlugin';
-import configSvgIconsPlugin from './configSvgIconsPlugin';
 // import autoprefixer from 'autoprefixer';
 // import configLegacyPlugin from './configLegacyPlugin';
 // 以下钩子在服务器启动时被调用：
@@ -32,7 +31,7 @@ export default (isBuild: boolean, mode: viteMode, viteEnv: ImportMetaEnv) => {
         //注入mock
         configMockPlugin(VITE_USE_MOCK, isBuild, mode),
 
-        configSvgIconsPlugin(isBuild), // svg 处理
+        // configSvgIconsPlugin(isBuild), // svg 处理
 
         //使用 gzip 或者 brotli 来压缩资源
         configCompressPlugin(VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE),
